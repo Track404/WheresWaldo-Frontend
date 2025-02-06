@@ -1,0 +1,18 @@
+.inactive img {
+  width: 250px;
+  height: auto;
+  opacity: 0.5;
+  transition: transform 1s ease, opacity 1s ease;
+}
+
+.inactive {
+  background-color: black;
+  height: 162px;
+}
+.active img {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 250px;
+  opacity: 1;
+  transform: scale(1.1);
+}
