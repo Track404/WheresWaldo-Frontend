@@ -30,18 +30,3 @@
     animation: logo-spin infinite 20s linear;
   }
 }
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-.homepage {
-  height: calc(100vh - 60px);
-  background-image: url('./assets/2687207.jpg');
-  background-color: rgba(0, 0, 0, 0.4);
-  background-blend-mode: multiply;
-}

@@ -1,9 +1,10 @@
 import { useContext } from 'react';
-import { CurrentBackgroundContext } from '../context/createContext';
+import { CurrentBackgroundContext } from '../../context/createContext';
 
-import Navbar from '../components/navbar';
-import ImageCard from '../components/imagesContainer';
-import styles from './Homepage.module.css';
+import Navbar from '../../components/navbar/navbar';
+import UsersTable from '../../components/Table/Table';
+import ImageCard from '../../components/imagesContainer/imagesContainer';
+import styles from './Leaderboardpage.module.css';
 
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -44,16 +45,12 @@ function App() {
     <>
       <Navbar />
       <div className={changeBackground()}>
-        <h1 className={styles.homepageText}>
-          Are you sure you can find them all
-        </h1>
+        <h1 className={styles.homepageText}>LeaderBoard </h1>
 
-        <div className="card">
-          <button className={styles.startButton}>Start a Game </button>
+        <div className={styles.card}>
+          <UsersTable />
         </div>
-        <div>
-          <h2 className={styles.mapName}>Choose your map</h2>
-        </div>
+
         <div className={styles.carousel}>
           <button onClick={handlePrev}>
             <ArrowBackIcon />

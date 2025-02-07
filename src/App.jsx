@@ -1,6 +1,8 @@
 import './App.css';
 import { useState } from 'react';
-import HomePage from './pages/Homepage';
+import HomePage from './pages/Homepage/Homepage';
+import LeaderboardPage from './pages/LeaderBoardPage/Leaderboardpage';
+import RulesPage from './pages/RulesPage/RulesPage';
 import waldoSea from './assets/waldo-first.jpg';
 import waldoBakery from './assets/waldo-second.jpg';
 import waldoCycling from './assets/waldo-3.jpg';
@@ -10,6 +12,14 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <HomePage />,
+  },
+  {
+    path: '/leaderboard',
+    element: <LeaderboardPage />,
+  },
+  {
+    path: '/rules',
+    element: <RulesPage />,
   },
 ]);
 function App() {

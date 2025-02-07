@@ -1,0 +1,51 @@
+/* UsersTable.module.css */
+.tableContainer {
+  background-color: #2d2d2d; /* Softer dark background */
+  color: #f5f5f5 !important; /* Light gray text for better readability */
+  border-radius: 8px;
+  height: 500px;
+  /* Adjust the width as needed */
+  overflow: auto;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.tableHeader {
+  background-color: #3c3c3c; /* Slightly lighter header */
+}
+
+.headerCell {
+  color: #f5f5f5 !important; /* Header text in light gray */
+  font-weight: bold;
+  font-size: 18px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 12px;
+}
+
+/* Softer row background colors */
+.rowEven {
+  background-color: #383838 !important; /* Lighter dark gray */
+}
+
+.rowOdd {
+  background-color: #444444 !important; /* Slightly darker but still light */
+}
+
+.cell {
+  color: #f5f5f5 !important; /* Ensure all text is light gray */
+  padding: 12px;
+  font-weight: 500 !important;
+  font-size: 15px !important;
+}
+
+/* Hover effect */
+.tableRow:hover {
+  background-color: #555555 !important; /* Light hover effect */
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Border between rows */
+.tableRow {
+  border-bottom: 1px solid #666666 !important; /* Subtle row border */
+}

@@ -9,9 +9,9 @@ function Navbar() {
           <h2>Where is Waldo</h2>
         </div>
         <div className={styles.rightNavbar}>
-          <Link>Play</Link>
-          <Link>ScoreBoard</Link>
-          <Link>Rules</Link>
+          <Link to="/">Play</Link>
+          <Link to="/leaderboard">LeaderBoard</Link>
+          <Link to="/rules">Rules</Link>
         </div>
       </nav>
     </>

@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   height: calc(100vh - 60px);
-  background: url('../assets/waldo-first.jpg') no-repeat center center/cover;
+  background: url('../../assets/waldo-first.jpg') no-repeat center center/cover;
   background-color: rgba(0, 0, 0, 0.4);
   background-blend-mode: multiply;
 }
@@ -14,7 +14,7 @@
   align-items: center;
   justify-content: center;
   height: calc(100vh - 60px);
-  background: url('../assets/waldo-second.jpg') no-repeat center center/cover;
+  background: url('../../assets/waldo-second.jpg') no-repeat center center/cover;
   background-color: rgba(0, 0, 0, 0.4);
   background-blend-mode: multiply;
 }
@@ -24,14 +24,14 @@
   align-items: center;
   justify-content: center;
   height: calc(100vh - 60px);
-  background: url('../assets/waldo-3.jpg') no-repeat center center/cover;
+  background: url('../../assets/waldo-3.jpg') no-repeat center center/cover;
   background-color: rgba(0, 0, 0, 0.4);
   background-blend-mode: multiply;
 }
 .homepageText {
   font-size: 3rem;
   font-weight: 600;
-  margin-bottom: 10vh;
+  margin-bottom: 5vh;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
