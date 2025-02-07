@@ -1,17 +1,17 @@
-import { useState } from 'react';
+import { useContext } from 'react';
+import { CurrentBackgroundContext } from '../context/createContext';
 
 import Navbar from '../components/navbar';
 import ImageCard from '../components/imagesContainer';
 import styles from './Homepage.module.css';
-import waldoSea from '../assets/waldo-first.jpg';
-import waldoBakery from '../assets/waldo-second.jpg';
-import waldoCycling from '../assets/waldo-3.jpg';
+
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 function App() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const images = [waldoSea, waldoBakery, waldoCycling];
+  const { activeIndex, setActiveIndex, images } = useContext(
+    CurrentBackgroundContext
+  );
 
   const handlePrev = () => {
     setActiveIndex((prevIndex) =>
