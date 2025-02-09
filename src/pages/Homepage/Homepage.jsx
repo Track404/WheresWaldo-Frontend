@@ -7,6 +7,7 @@ import styles from './Homepage.module.css';
 
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Link } from 'react-router-dom';
 
 function HomePage() {
   const { activeIndex, setActiveIndex, images } = useContext(
@@ -49,7 +50,9 @@ function HomePage() {
         </h1>
 
         <div className="card">
-          <button className={styles.startButton}>Start a Game </button>
+          <button className={styles.startButton}>
+            <Link to="/game">Start a Game</Link>{' '}
+          </button>
         </div>
         <div>
           <h2 className={styles.mapName}>Choose your map</h2>

@@ -57,3 +57,7 @@
 .startButton {
   margin-bottom: 10vh;
 }
+
+button > a {
+  color: black;
+}

@@ -1,0 +1,26 @@
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+}
+
+.image {
+  width: auto; /* Make it responsive */
+  height: 100vh; /* Full viewport height */
+  object-fit: cover;
+}
+
+.coordinates {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 16px;
+}
