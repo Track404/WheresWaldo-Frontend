@@ -1,16 +1,21 @@
 import { useState, useContext, useRef } from 'react';
 import { useMeasure, useScroll, useMouse } from 'react-use';
 import styles from './Gamepage.module.css';
+import Timer from '../../components/Timer/Timer';
+import { Dialog } from '@mui/material';
 import { CurrentBackgroundContext } from '../../context/createContext';
 
 const GamePage = () => {
   const { activeIndex, images } = useContext(CurrentBackgroundContext);
-  const containerRef = useRef(null); // Reference for scrolling container
-  const imageRef = useRef(null); // Reference for measuring image
+  const [openModal, setOpenModal] = useState(false);
+  const containerRef = useRef(null);
+  const imageRef = useRef(null);
 
-  // ✅ Measure the actual displayed size of the image
-  const [imageBounds, { width: imageWidth, height: imageHeight }] =
-    useMeasure();
+  // ✅ Measure the image size
+  const [
+    imageBounds,
+    { width: imageWidth, height: imageHeight, left: imageLeft },
+  ] = useMeasure();
 
   // ✅ Get scroll position
   const { x: scrollX, y: scrollY } = useScroll(containerRef);
@@ -20,20 +25,25 @@ const GamePage = () => {
 
   const [normalizedClick, setNormalizedClick] = useState({ x: 0, y: 0 });
 
-  // ✅ Normalize mouse position dynamically
   const normalizeMousePosition = () => {
-    if (imageWidth === 0 || imageHeight === 0) return;
+    if (!imageWidth || !imageHeight || !containerRef.current) return;
 
-    const relativeX = docX + scrollX;
+    const containerWidth = containerRef.current.clientWidth;
+
+    // ✅ Adjust for centering if needed
+    const offsetX = (containerWidth - imageWidth) / 2;
+
+    // ✅ Compute relative click position
+    const relativeX = docX + scrollX - imageLeft - offsetX;
     const relativeY = docY + scrollY;
 
-    // Normalize coordinates based on actual image size
+    // ✅ Normalize the coordinates
     const normalizedX = relativeX / imageWidth;
     const normalizedY = relativeY / imageHeight;
 
     setNormalizedClick({ x: normalizedX, y: normalizedY });
 
-    console.log('Normalized Coordinates:', { x: normalizedX, y: normalizedY });
+    console.log('Normalized Click:', { x: normalizedX, y: normalizedY });
   };
 
   return (
@@ -54,6 +64,29 @@ const GamePage = () => {
       <div className={styles.coordinates}>
         <p>Normalized X: {normalizedClick.x.toFixed(3)}</p>
         <p>Normalized Y: {normalizedClick.y.toFixed(3)}</p>
+        <button
+          onClick={() => {
+            setOpenModal(!openModal);
+          }}
+        >
+          Open
+        </button>
+        <Timer />
+        <Dialog open={openModal}>
+          <h1>Congrats !</h1>
+          <div>Enter your name </div>
+          <form
+            action="/users"
+            method="post"
+            onSubmit={() => {
+              setOpenModal(false);
+            }}
+          >
+            <label htmlFor="username"></label>
+            <input type="text" id="username" name="username" required />
+            <button type="submit">Submit</button>
+          </form>
+        </Dialog>
       </div>
     </div>
   );
