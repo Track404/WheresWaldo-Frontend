@@ -1,6 +1,9 @@
 import { useState, useContext, useRef } from 'react';
 import { useMeasure, useScroll, useMouse } from 'react-use';
 import styles from './Gamepage.module.css';
+import ObjectFind from '../../components/ObjectFind/ObjectFind';
+import Waldo from '../../assets/Character.Waldo.webp';
+import Odlaw from '../../assets/Character.Odlaw.webp';
 import Timer from '../../components/Timer/Timer';
 import { Dialog } from '@mui/material';
 import { CurrentBackgroundContext } from '../../context/createContext';
@@ -8,6 +11,7 @@ import { CurrentBackgroundContext } from '../../context/createContext';
 const GamePage = () => {
   const { activeIndex, images } = useContext(CurrentBackgroundContext);
   const [openModal, setOpenModal] = useState(false);
+  const [finalTime, setFinalTime] = useState(0);
   const containerRef = useRef(null);
   const imageRef = useRef(null);
 
@@ -62,6 +66,10 @@ const GamePage = () => {
         className={styles.image}
       />
       <div className={styles.coordinates}>
+        <h2>Find these character:</h2>
+        <ObjectFind image={Waldo} isFind={false} name="Waldo" />
+        <ObjectFind image={Odlaw} isFind={false} name="Odlaw" />
+
         <p>Normalized X: {normalizedClick.x.toFixed(3)}</p>
         <p>Normalized Y: {normalizedClick.y.toFixed(3)}</p>
         <button
@@ -71,21 +79,36 @@ const GamePage = () => {
         >
           Open
         </button>
-        <Timer />
-        <Dialog open={openModal}>
-          <h1>Congrats !</h1>
-          <div>Enter your name </div>
-          <form
-            action="/users"
-            method="post"
-            onSubmit={() => {
-              setOpenModal(false);
-            }}
-          >
-            <label htmlFor="username"></label>
-            <input type="text" id="username" name="username" required />
-            <button type="submit">Submit</button>
-          </form>
+        <Timer setFinalTime={setFinalTime} />
+        <Dialog
+          open={openModal}
+          classes={{ paper: styles.dialogPaper }}
+          BackdropProps={{ classes: { root: styles.customBackdrop } }}
+        >
+          <div className={styles.dialogContainer}>
+            <h1>Congrats ! &#127881;</h1>
+            <h2>Your time is {finalTime}s</h2>
+            <form
+              action="/users"
+              method="post"
+              onSubmit={() => {
+                setOpenModal(false);
+              }}
+            >
+              <label className={styles.label} htmlFor="username">
+                Enter your name
+              </label>
+              <input
+                className={styles.input}
+                type="text"
+                id="username"
+                name="username"
+                required
+              />
+
+              <button type="submit">Submit</button>
+            </form>
+          </div>
         </Dialog>
       </div>
     </div>

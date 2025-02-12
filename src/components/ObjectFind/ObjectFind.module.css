@@ -1,0 +1,17 @@
+.notFind {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.find {
+  text-decoration-line: line-through;
+  color: red;
+}
+.img {
+  object-fit: contain;
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+}
