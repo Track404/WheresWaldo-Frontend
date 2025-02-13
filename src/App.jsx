@@ -14,13 +14,14 @@ import WhitebeardIcon from './assets/Character.Whitebeard.webp';
 import WoofIcon from './assets/Character.Woof.webp';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { CurrentBackgroundContext } from './context/createContext';
+
 const router = createBrowserRouter([
   {
     path: '/',
     element: <HomePage />,
   },
   {
-    path: '/leaderboard',
+    path: '/leaderboard/:id',
     element: <LeaderboardPage />,
   },
   {
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
     element: <RulesPage />,
   },
   {
-    path: '/game',
+    path: '/game/:id',
     element: <GamePage />,
   },
 ]);

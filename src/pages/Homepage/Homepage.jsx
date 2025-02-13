@@ -51,7 +51,7 @@ function HomePage() {
 
         <div className="card">
           <button className={styles.startButton}>
-            <Link to="/game">Start a Game</Link>{' '}
+            <Link to={`/game/${activeIndex + 1}`}>Start a Game</Link>{' '}
           </button>
         </div>
         <div>

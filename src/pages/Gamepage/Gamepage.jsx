@@ -1,5 +1,6 @@
 import { useState, useContext, useRef } from 'react';
 import { useMeasure, useScroll, useMouse } from 'react-use';
+import { useParams } from 'react-router-dom';
 import styles from './Gamepage.module.css';
 import ObjectFind from '../../components/ObjectFind/ObjectFind';
 import Waldo from '../../assets/Character.Waldo.webp';
@@ -7,13 +8,17 @@ import Odlaw from '../../assets/Character.Odlaw.webp';
 import Timer from '../../components/Timer/Timer';
 import { Dialog } from '@mui/material';
 import { CurrentBackgroundContext } from '../../context/createContext';
+import { getMap } from '../../api/map';
+import { useQuery, useMutation } from '@tanstack/react-query';
 
 const GamePage = () => {
   const { activeIndex, images } = useContext(CurrentBackgroundContext);
   const [openModal, setOpenModal] = useState(false);
   const [finalTime, setFinalTime] = useState(0);
+  const [mapData, setMapData] = useState(null);
   const containerRef = useRef(null);
   const imageRef = useRef(null);
+  const { id } = useParams();
 
   // ✅ Measure the image size
   const [
@@ -49,6 +54,18 @@ const GamePage = () => {
 
     console.log('Normalized Click:', { x: normalizedX, y: normalizedY });
   };
+  const { isPending, isError, data, error } = useQuery({
+    queryKey: ['map', id, activeIndex],
+    queryFn: getMap,
+    enabled: !!id,
+    onSuccess: (fetchedData) => {
+      console.log(fetchedData);
+      setMapData(fetchedData); // Update the local state when data is fetched
+    }, // Avoid making the request if mapId is not available
+  });
+
+  if (isPending) return <p>Loading...</p>;
+  if (isError) return <p>Error: {error.message}</p>;
 
   return (
     <div
@@ -67,8 +84,17 @@ const GamePage = () => {
       />
       <div className={styles.coordinates}>
         <h2>Find these character:</h2>
-        <ObjectFind image={Waldo} isFind={false} name="Waldo" />
-        <ObjectFind image={Odlaw} isFind={false} name="Odlaw" />
+        {data.map.Characters.map((character) => {
+          return (
+            <ObjectFind
+              key={character.id}
+              image={Waldo}
+              isFind={false}
+              name={character.name}
+            />
+          );
+        })}
+        <h1>Map ID: {id}</h1>
 
         <p>Normalized X: {normalizedClick.x.toFixed(3)}</p>
         <p>Normalized Y: {normalizedClick.y.toFixed(3)}</p>

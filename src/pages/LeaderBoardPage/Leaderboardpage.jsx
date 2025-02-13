@@ -1,11 +1,14 @@
 import { useContext } from 'react';
 import { CurrentBackgroundContext } from '../../context/createContext';
-
+import { getMapUsers } from '../../api/user';
+import { useQuery } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
 import Navbar from '../../components/navbar/navbar';
 import UsersTable from '../../components/Table/Table';
 import ImageCard from '../../components/imagesContainer/imagesContainer';
 import styles from './Leaderboardpage.module.css';
 
+import { useNavigate } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
@@ -13,17 +16,20 @@ function App() {
   const { activeIndex, setActiveIndex, images } = useContext(
     CurrentBackgroundContext
   );
-
+  const navigate = useNavigate();
+  const { id } = useParams();
   const handlePrev = () => {
     setActiveIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
+    navigate(`/leaderboard/${id == 0 ? 3 : Number(id) - 1}`);
   };
 
   const handleNext = () => {
     setActiveIndex((prevIndex) =>
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
+    navigate(`/leaderboard/${id == 3 ? 1 : Number(id) + 1}`);
   };
 
   const changeBackground = () => {
@@ -41,6 +47,19 @@ function App() {
         return styles.homepage;
     }
   };
+
+  const { isPending, isError, data, error } = useQuery({
+    queryKey: ['map', id, activeIndex],
+    queryFn: getMapUsers,
+    enabled: !!id,
+    onSuccess: (fetchedData) => {
+      console.log(fetchedData);
+      // Update the local state when data is fetched
+    }, // Avoid making the request if mapId is not available
+  });
+  if (isPending) return <p>Loading...</p>;
+  if (isError) return <p>Error: {error.message}</p>;
+
   return (
     <>
       <Navbar />
@@ -48,7 +67,7 @@ function App() {
         <h1 className={styles.homepageText}>LeaderBoard </h1>
 
         <div className={styles.card}>
-          <UsersTable />
+          <UsersTable usersData={data.data.users} />
         </div>
 
         <div className={styles.carousel}>
