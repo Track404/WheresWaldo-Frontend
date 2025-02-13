@@ -9,9 +9,9 @@ export const getUser = async (userId) => {
   }
 };
 
-export const postUser = async ({ mapId, userData }) => {
+export const postUser = async ({ id, data }) => {
   try {
-    const response = await axiosInstance.post(`/map/${mapId}/user`, userData);
+    const response = await axiosInstance.post(`/map/${id}/user`, data);
     return response;
   } catch (error) {
     throw new Error(error);

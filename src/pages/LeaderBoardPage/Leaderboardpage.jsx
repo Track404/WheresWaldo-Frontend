@@ -22,7 +22,7 @@ function App() {
     setActiveIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
-    navigate(`/leaderboard/${id == 0 ? 3 : Number(id) - 1}`);
+    navigate(`/leaderboard/${id == 1 ? 3 : Number(id) - 1}`);
   };
 
   const handleNext = () => {
