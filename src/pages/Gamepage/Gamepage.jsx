@@ -1,4 +1,4 @@
-import { useState, useContext, useRef, use } from 'react';
+import { useState, useContext, useRef, useEffect } from 'react';
 import { useMeasure, useScroll, useMouse } from 'react-use';
 import { useParams } from 'react-router-dom';
 import styles from './Gamepage.module.css';
@@ -15,9 +15,10 @@ import { useNavigate } from 'react-router-dom';
 const GamePage = () => {
   const { activeIndex, images } = useContext(CurrentBackgroundContext);
   const [openModal, setOpenModal] = useState(false);
+  const [isRunning, setIsRunning] = useState(true);
   const [finalTime, setFinalTime] = useState(0);
   const [username, setUsername] = useState('');
-  const [mapData, setMapData] = useState(null);
+  const [characterData, setCharacterData] = useState(null);
   const containerRef = useRef(null);
   const imageRef = useRef(null);
   const { id } = useParams();
@@ -54,6 +55,18 @@ const GamePage = () => {
     const normalizedY = relativeY / imageHeight;
 
     setNormalizedClick({ x: normalizedX, y: normalizedY });
+    characterData.forEach((character) => {
+      if (
+        character.position.Xmin <= normalizedX &&
+        normalizedX <= character.position.Xmax &&
+        character.position.Ymin <= normalizedY &&
+        normalizedY <= character.position.Ymax
+      ) {
+        setCharacterData((prevData) =>
+          prevData.filter((c) => c.id !== character.id)
+        );
+      }
+    });
 
     console.log('Normalized Click:', { x: normalizedX, y: normalizedY });
   };
@@ -62,8 +75,11 @@ const GamePage = () => {
     queryFn: getMap,
     enabled: !!id,
     onSuccess: (fetchedData) => {
-      console.log(fetchedData);
-      setMapData(fetchedData); // Update the local state when data is fetched
+      if (fetchedData?.map) {
+        setCharacterData(fetchedData.map);
+      } else {
+        console.error('Unexpected data structure:', fetchedData);
+      } // Update the local state when data is fetched
     }, // Avoid making the request if mapId is not available
   });
 
@@ -82,9 +98,22 @@ const GamePage = () => {
       data: { username: username, time: Number(finalTime) },
     }); // Trigger the mutation
     setUsername(''); // Clear the input
+    navigate('/');
     setOpenModal(false);
     console.log({ username: username, time: Number(finalTime) });
   };
+  useEffect(() => {
+    if (data) {
+      console.log('Fetched Data:', data.map.Characters);
+      setCharacterData(data.map.Characters); // Update state
+    }
+  }, [data]);
+  useEffect(() => {
+    if (characterData && characterData.length === 0) {
+      setIsRunning(!isRunning);
+      setOpenModal(!openModal);
+    }
+  }, [characterData]);
 
   if (isPending) return <p>Loading...</p>;
   if (isError) return <p>Error: {error.message}</p>;
@@ -106,7 +135,7 @@ const GamePage = () => {
       />
       <div className={styles.coordinates}>
         <h2>Find these character:</h2>
-        {data.map.Characters.map((character) => {
+        {characterData?.map((character) => {
           return (
             <ObjectFind
               key={character.id}
@@ -117,7 +146,7 @@ const GamePage = () => {
           );
         })}
 
-        <p>Normalized X: {normalizedClick.x.toFixed(3)}</p>
+        {/*<p>Normalized X: {normalizedClick.x.toFixed(3)}</p>
         <p>Normalized Y: {normalizedClick.y.toFixed(3)}</p>
         <button
           onClick={() => {
@@ -125,8 +154,8 @@ const GamePage = () => {
           }}
         >
           Open
-        </button>
-        <Timer setFinalTime={setFinalTime} />
+        </button>*/}
+        <Timer setFinalTime={setFinalTime} isRunning={isRunning} />
         <Dialog
           open={openModal}
           classes={{ paper: styles.dialogPaper }}

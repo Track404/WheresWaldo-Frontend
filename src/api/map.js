@@ -2,7 +2,7 @@ import axiosInstance from './axiosInstance';
 
 export const getMap = async ({ queryKey }) => {
   try {
-    const [_key, id] = queryKey;
+    const [, id] = queryKey;
     if (!id) throw new Error('Missing mapId');
     const response = await axiosInstance.get(`/map/${id}`);
     return response.data;

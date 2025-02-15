@@ -49,7 +49,7 @@ function App() {
   };
 
   const { isPending, isError, data, error } = useQuery({
-    queryKey: ['map', id, activeIndex],
+    queryKey: ['users', id, activeIndex],
     queryFn: getMapUsers,
     enabled: !!id,
     onSuccess: (fetchedData) => {
