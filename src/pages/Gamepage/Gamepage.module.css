@@ -1,8 +1,9 @@
 .container {
   display: flex;
-  justify-content: center;
+  /*justify-content: center;*/
+  justify-content: flex-start;
   align-items: center;
-  width: 100vw;
+  width: auto;
   height: 100vh;
   overflow: auto; /* Allow scrolling */
   position: relative;
@@ -96,4 +97,10 @@
 .input-group:hover .label,
 .input:focus {
   color: #05060fc2;
+}
+
+@media (min-width: 1350px) {
+  .container {
+    justify-content: center;
+  }
 }

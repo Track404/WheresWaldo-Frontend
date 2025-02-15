@@ -1,5 +1,5 @@
 import { useState, useContext, useRef, useEffect } from 'react';
-import { useMeasure, useScroll, useMouse } from 'react-use';
+import { useMeasure, useMouse } from 'react-use';
 import { useParams } from 'react-router-dom';
 import styles from './Gamepage.module.css';
 import ObjectFind from '../../components/ObjectFind/ObjectFind';
@@ -21,6 +21,7 @@ const GamePage = () => {
   const [characterData, setCharacterData] = useState(null);
   const containerRef = useRef(null);
   const imageRef = useRef(null);
+
   const { id } = useParams();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -30,31 +31,54 @@ const GamePage = () => {
     { width: imageWidth, height: imageHeight, left: imageLeft },
   ] = useMeasure();
 
-  // ✅ Get scroll position
-  const { x: scrollX, y: scrollY } = useScroll(containerRef);
-
   // ✅ Get mouse position relative to the container
   const { docX, docY } = useMouse(containerRef);
 
   const [normalizedClick, setNormalizedClick] = useState({ x: 0, y: 0 });
-
   const normalizeMousePosition = () => {
-    if (!imageWidth || !imageHeight || !containerRef.current) return;
+    if (
+      !imageWidth ||
+      !imageHeight ||
+      !containerRef.current ||
+      imageLeft === undefined
+    ) {
+      console.error('Missing required values:', {
+        imageWidth,
+        imageHeight,
+        imageLeft,
+      });
+      return;
+    }
 
-    const containerWidth = containerRef.current.clientWidth;
+    // Get the container's bounding rectangle to account for scroll position
+    const containerRect = containerRef.current.getBoundingClientRect();
 
-    // ✅ Adjust for centering if needed
-    const offsetX = (containerWidth - imageWidth) / 2;
+    // Manually get the scroll position of the container
+    const containerScrollX = containerRef.current.scrollLeft;
+    let offsetX = 0;
+    if (window.innerWidth > 1350) {
+      offsetX = (containerRect.width - imageWidth) / 2; // This is the offset on the X-axis
+    }
+    // Compute the relative mouse position within the container, adjusting for scroll
+    const relativeX = docX - containerRect.left + containerScrollX - offsetX; // Adjust for horizontal scroll
+    const relativeY = docY - containerRect.top; // Adjust for vertical scroll
 
-    // ✅ Compute relative click position
-    const relativeX = docX + scrollX - imageLeft - offsetX;
-    const relativeY = docY + scrollY;
+    // Log intermediate values for debugging
 
-    // ✅ Normalize the coordinates
+    // Normalize the coordinates based on the current image size
     const normalizedX = relativeX / imageWidth;
     const normalizedY = relativeY / imageHeight;
 
+    // Check if normalized values are valid before updating state
+    console.log('normalizedX:', normalizedX, 'normalizedY:', normalizedY);
+
+    if (isNaN(normalizedX) || isNaN(normalizedY)) {
+      console.error('Invalid normalized values:', { normalizedX, normalizedY });
+      return;
+    }
+
     setNormalizedClick({ x: normalizedX, y: normalizedY });
+
     characterData.forEach((character) => {
       if (
         character.position.Xmin <= normalizedX &&
@@ -67,9 +91,8 @@ const GamePage = () => {
         );
       }
     });
-
-    console.log('Normalized Click:', { x: normalizedX, y: normalizedY });
   };
+
   const { isPending, isError, data, error } = useQuery({
     queryKey: ['map', id, activeIndex],
     queryFn: getMap,
@@ -146,15 +169,6 @@ const GamePage = () => {
           );
         })}
 
-        {/*<p>Normalized X: {normalizedClick.x.toFixed(3)}</p>
-        <p>Normalized Y: {normalizedClick.y.toFixed(3)}</p>
-        <button
-          onClick={() => {
-            setOpenModal(!openModal);
-          }}
-        >
-          Open
-        </button>*/}
         <Timer setFinalTime={setFinalTime} isRunning={isRunning} />
         <Dialog
           open={openModal}
