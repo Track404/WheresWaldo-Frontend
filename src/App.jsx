@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import HomePage from './pages/Homepage/Homepage';
 import LeaderboardPage from './pages/LeaderBoardPage/Leaderboardpage';
 import RulesPage from './pages/RulesPage/RulesPage';
@@ -34,8 +34,11 @@ const router = createBrowserRouter([
   },
 ]);
 function App() {
-  //set the active image
-  const [activeIndex, setActiveIndex] = useState(0);
+  const storedIndex = localStorage.getItem('activeIndex');
+  const [activeIndex, setActiveIndex] = useState(
+    storedIndex ? parseInt(storedIndex) : 0
+  );
+
   const images = [waldoSea, waldoBakery, waldoCycling];
   const characterImages = [
     WaldoIcon,
@@ -44,7 +47,9 @@ function App() {
     WhitebeardIcon,
     WoofIcon,
   ];
-
+  useEffect(() => {
+    localStorage.setItem('activeIndex', activeIndex);
+  }, [activeIndex]);
   return (
     <>
       <CurrentBackgroundContext

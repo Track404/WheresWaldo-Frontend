@@ -127,8 +127,10 @@ const GamePage = () => {
   };
   useEffect(() => {
     if (data) {
-      console.log('Fetched Data:', data.map.Characters);
-      setCharacterData(data.map.Characters); // Update state
+      if (data.map && data.map.Characters) {
+        console.log('Fetched Data:', data.map.Characters);
+        setCharacterData(data.map.Characters);
+      }
     }
   }, [data]);
   useEffect(() => {
@@ -157,17 +159,18 @@ const GamePage = () => {
         className={styles.image}
       />
       <div className={styles.coordinates}>
-        <h2>Find these character:</h2>
-        {characterData?.map((character) => {
-          return (
-            <ObjectFind
-              key={character.id}
-              image={Waldo}
-              isFind={false}
-              name={character.name}
-            />
-          );
-        })}
+        <h2>Find:</h2>
+        {characterData &&
+          characterData.map((character) => {
+            return (
+              <ObjectFind
+                key={character.id}
+                image={Waldo}
+                isFind={false}
+                name={character.name}
+              />
+            );
+          })}
 
         <Timer setFinalTime={setFinalTime} isRunning={isRunning} />
         <Dialog

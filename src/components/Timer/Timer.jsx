@@ -18,7 +18,7 @@ const Timer = ({ setFinalTime, isRunning }) => {
   }, [isRunning, seconds, setFinalTime]); // Runs when `isRunning` changes
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '20px' }}>
+    <>
       <h1>Timer: {seconds}s</h1>
 
       <button onClick={() => setSeconds(0)}>Restart</button>
@@ -32,7 +32,7 @@ const Timer = ({ setFinalTime, isRunning }) => {
           Quit
         </Link>
       </button>
-    </div>
+    </>
   );
 };
 

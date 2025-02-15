@@ -60,8 +60,14 @@
 }
 
 .card {
-  width: 600px;
+  min-width: 50vw;
 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4), 0 6px 30px rgba(0, 0, 0, 0.1); /* Lighter with depth */
   transition: all 0.3s ease-in-out;
+}
+
+@media (min-width: 1000px) {
+  .container {
+    justify-content: center;
+  }
 }
