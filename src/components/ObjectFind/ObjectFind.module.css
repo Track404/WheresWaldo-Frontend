@@ -4,13 +4,22 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
+  padding-top: 5px;
 }
 .notFind h3 {
   margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 5px;
 }
 .img {
   object-fit: contain;
   height: 50px;
   width: 50px;
   border-radius: 100%;
+}
+
+@media (max-width: 450px) {
+  .notFind h3 {
+    font-size: 14px;
+  }
 }

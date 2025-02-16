@@ -25,7 +25,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
+  position: fixed;
   gap: 5px;
   top: 0; /* Position 50% from the top of the parent */
   left: 50%; /* Position 50% from the left of the parent */
@@ -34,6 +34,10 @@
   color: white;
   padding: 5px 10px;
   border-radius: 5px;
+}
+.coordinates h2 {
+  margin: 0;
+  padding-bottom: 20px;
 }
 
 .dialogPaper {
@@ -104,9 +108,21 @@
 .input:focus {
   color: #05060fc2;
 }
-
+.characterImg {
+  display: flex;
+  gap: 5px;
+}
 @media (min-width: 1350px) {
   .container {
     justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .coordinates {
+    flex-direction: column;
+  }
+  .coordinates h2 {
+    padding-bottom: 0px;
   }
 }

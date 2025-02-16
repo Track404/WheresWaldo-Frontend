@@ -3,7 +3,6 @@ import { useMeasure, useMouse } from 'react-use';
 import { useParams } from 'react-router-dom';
 import styles from './Gamepage.module.css';
 import ObjectFind from '../../components/ObjectFind/ObjectFind';
-//import Odlaw from '../../assets/Character.Odlaw.webp';
 import Timer from '../../components/Timer/Timer';
 import { Dialog } from '@mui/material';
 import { CurrentBackgroundContext } from '../../context/createContext';
@@ -35,7 +34,7 @@ const GamePage = () => {
   // ✅ Get mouse position relative to the container
   const { docX, docY } = useMouse(containerRef);
 
-  const [normalizedClick, setNormalizedClick] = useState({ x: 0, y: 0 });
+  const [, setNormalizedClick] = useState({ x: 0, y: 0 });
   const normalizeMousePosition = () => {
     if (
       !imageWidth ||
@@ -161,17 +160,19 @@ const GamePage = () => {
       />
       <div className={styles.coordinates}>
         <h2>Find:</h2>
-        {characterData &&
-          characterData.map((character) => {
-            return (
-              <ObjectFind
-                key={character.id}
-                image={characterImages[character.imageId]}
-                isFind={false}
-                name={character.name}
-              />
-            );
-          })}
+        <div className={styles.characterImg}>
+          {characterData &&
+            characterData.map((character) => {
+              return (
+                <ObjectFind
+                  key={character.id}
+                  image={characterImages[character.imageId]}
+                  isFind={false}
+                  name={character.name}
+                />
+              );
+            })}
+        </div>
 
         <Timer setFinalTime={setFinalTime} isRunning={isRunning} />
         <Dialog

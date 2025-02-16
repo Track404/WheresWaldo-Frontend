@@ -1,67 +1,72 @@
 /* From Uiverse.io by vinodjangid07 */
-.Btn {
+.containerBtn {
   display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.timer {
+  display: flex;
+  gap: 10px;
+}
+
+.containerTimer {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: 45px;
-  height: 45px;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.containerTimer h1 {
+  margin-top: 0;
+  margin-bottom: 0px;
+}
+.restartBtn {
+  padding: 10px 10px;
+  border: unset;
+  border-radius: 15px;
+  color: #212121;
+  z-index: 1;
+  background: #e8e8e8;
   position: relative;
+  font-weight: 1000;
+  font-size: 17px;
+  -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  transition: all 250ms;
   overflow: hidden;
-  transition-duration: 0.3s;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
-  background-color: rgb(255, 65, 65);
 }
 
-/* plus sign */
-.sign {
-  width: 100%;
-  transition-duration: 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sign svg {
-  width: 17px;
-}
-
-.sign svg path {
-  fill: white;
-}
-/* text */
-.text {
+.restartBtn::before {
+  content: '';
   position: absolute;
-  right: 0%;
-  width: 0%;
-  opacity: 0;
-  color: white;
-  font-size: 1.2em;
-  font-weight: 600;
-  transition-duration: 0.3s;
-}
-/* hover effect on button width */
-.Btn:hover {
-  width: 125px;
-  border-radius: 40px;
-  transition-duration: 0.3s;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  border-radius: 15px;
+  background-color: #3c3c3c;
+  z-index: -1;
+  -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  transition: all 250ms;
 }
 
-.Btn:hover .sign {
-  width: 30%;
-  transition-duration: 0.3s;
-  padding-left: 20px;
+.restartBtn:hover {
+  color: #e8e8e8;
 }
-/* hover effect button's text */
-.Btn:hover .text {
-  opacity: 1;
-  width: 70%;
-  transition-duration: 0.3s;
-  padding-right: 10px;
+
+.restartBtn:hover::before {
+  width: 100%;
 }
-/* button click effect*/
-.Btn:active {
-  transform: translate(2px, 2px);
+
+@media (max-width: 600px) {
+  .containerBtn {
+    flex-direction: column;
+  }
+  .coordinates h2 {
+    padding-bottom: 0px;
+  }
 }
