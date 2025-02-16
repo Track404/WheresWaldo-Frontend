@@ -7,8 +7,8 @@ import styles from './Homepage.module.css';
 
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-
 import { useNavigate } from 'react-router-dom';
+
 function HomePage() {
   const { activeIndex, setActiveIndex, images } = useContext(
     CurrentBackgroundContext

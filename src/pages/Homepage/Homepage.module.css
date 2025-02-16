@@ -98,17 +98,7 @@
 .startButton:hover::before {
   width: 100%;
 }
-/*
-.startButton a {
-  color: #212121;
-  text-decoration: none;
-  transition: all 250ms;
-}
-.startButton a:hover {
-  color: #e8e8e8;
-}*/
 
-/* From Uiverse.io by snooka1 */
 .carouselBtn {
   font: inherit;
   background-color: #f0f0f0;
@@ -200,7 +190,7 @@
 /* For very large screens */
 @media (min-width: 1350px) {
   .homepageText {
-    font-size: 3.5rem; /* Larger font size for very wide screens */
+    font-size: 3.5rem;
     margin-bottom: 12vh;
   }
 

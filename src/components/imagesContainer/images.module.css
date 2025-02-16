@@ -1,44 +1,41 @@
-/* Container styles */
 .inactive {
-  background-color: black; /* Background color for the container */
-  display: flex; /* Ensures the image is centered */
-  align-items: center; /* Centers the image vertically */
-  justify-content: center; /* Centers the image horizontally */
-  height: 162px; /* Fixed height for the container */
-  overflow: hidden; /* Ensures no overflowing content */
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 162px;
+  overflow: hidden;
 }
 
 .inactive img {
   width: 250px;
   height: auto;
-  opacity: 0.5; /* Semi-transparent image */
-  transition: transform 1s ease, opacity 1s ease; /* Smooth transition */
+  opacity: 0.5;
+  transition: transform 1s ease, opacity 1s ease;
 }
 
 .active img {
   margin-left: 10px;
   margin-right: 10px;
   width: 250px;
-  opacity: 1; /* Fully opaque image */
-  transform: scale(1.1); /* Slight zoom effect */
+  opacity: 1;
+  transform: scale(1.1);
 }
 
-/* Responsive styles */
 @media (max-width: 800px) {
   .inactive img,
   .active img {
-    width: 30vw; /* Smaller width for mobile devices */
+    width: 30vw;
   }
 
   .inactive {
-    height: auto; /* Adjust container height for smaller screens */
-    /* Add padding for better spacing */
+    height: auto;
   }
 }
 
 @media (max-width: 480px) {
   .inactive img,
   .active img {
-    width: 25vw; /* Smaller width for very small screens */
+    width: 25vw;
   }
 }

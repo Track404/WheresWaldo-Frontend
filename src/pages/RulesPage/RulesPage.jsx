@@ -23,6 +23,7 @@ function RulesPage() {
         return styles.homepage;
     }
   };
+
   return (
     <>
       <Navbar />

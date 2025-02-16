@@ -19,6 +19,7 @@
     "@tanstack/react-query-devtools": "^5.66.0",
     "axios": "^1.7.9",
     "date-fns": "^4.1.0",
+    "dotenv": "^16.4.7",
     "normalize.css": "^8.0.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
