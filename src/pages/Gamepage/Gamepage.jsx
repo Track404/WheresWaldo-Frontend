@@ -3,7 +3,6 @@ import { useMeasure, useMouse } from 'react-use';
 import { useParams } from 'react-router-dom';
 import styles from './Gamepage.module.css';
 import ObjectFind from '../../components/ObjectFind/ObjectFind';
-import Waldo from '../../assets/Character.Waldo.webp';
 //import Odlaw from '../../assets/Character.Odlaw.webp';
 import Timer from '../../components/Timer/Timer';
 import { Dialog } from '@mui/material';
@@ -13,7 +12,9 @@ import { postUser } from '../../api/user';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 const GamePage = () => {
-  const { activeIndex, images } = useContext(CurrentBackgroundContext);
+  const { activeIndex, images, characterImages } = useContext(
+    CurrentBackgroundContext
+  );
   const [openModal, setOpenModal] = useState(false);
   const [isRunning, setIsRunning] = useState(true);
   const [finalTime, setFinalTime] = useState(0);
@@ -165,7 +166,7 @@ const GamePage = () => {
             return (
               <ObjectFind
                 key={character.id}
-                image={Waldo}
+                image={characterImages[character.imageId]}
                 isFind={false}
                 name={character.name}
               />
