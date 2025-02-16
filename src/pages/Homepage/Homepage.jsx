@@ -7,13 +7,14 @@ import styles from './Homepage.module.css';
 
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Link } from 'react-router-dom';
 
+import { useNavigate } from 'react-router-dom';
 function HomePage() {
   const { activeIndex, setActiveIndex, images } = useContext(
     CurrentBackgroundContext
   );
 
+  const navigate = useNavigate();
   const handlePrev = () => {
     setActiveIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
@@ -50,15 +51,20 @@ function HomePage() {
         </h1>
 
         <div className="card">
-          <button className={styles.startButton}>
-            <Link to={`/game/${activeIndex + 1}`}>Start a Game</Link>{' '}
+          <button
+            className={styles.startButton}
+            onClick={() => {
+              navigate(`/game/${activeIndex + 1}`);
+            }}
+          >
+            Start Game
           </button>
         </div>
         <div>
           <h2 className={styles.mapName}>Choose your map</h2>
         </div>
         <div className={styles.carousel}>
-          <button onClick={handlePrev}>
+          <button onClick={handlePrev} className={styles.carouselBtn}>
             <ArrowBackIcon />
           </button>
           <div className={styles.imageContainer}>
@@ -73,7 +79,7 @@ function HomePage() {
             />
           </div>
 
-          <button onClick={handleNext}>
+          <button onClick={handleNext} className={styles.carouselBtn}>
             <ArrowForwardIcon />
           </button>
         </div>
