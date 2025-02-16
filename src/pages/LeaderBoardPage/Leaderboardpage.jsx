@@ -71,7 +71,7 @@ function App() {
         </div>
 
         <div className={styles.carousel}>
-          <button onClick={handlePrev}>
+          <button onClick={handlePrev} className={styles.carouselBtn}>
             <ArrowBackIcon />
           </button>
           <div className={styles.imageContainer}>
@@ -86,7 +86,7 @@ function App() {
             />
           </div>
 
-          <button onClick={handleNext}>
+          <button onClick={handleNext} className={styles.carouselBtn}>
             <ArrowForwardIcon />
           </button>
         </div>
