@@ -138,6 +138,7 @@ const GamePage = () => {
       setIsRunning(!isRunning);
       setOpenModal(!openModal);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [characterData]);
 
   if (isPending) return <p>Loading...</p>;
@@ -196,10 +197,15 @@ const GamePage = () => {
                 type="text"
                 id="username"
                 name="username"
+                pattern="[A-Za-z0-9]+"
+                title="Only letters and numbers are allowed, and the maximum length is 12"
+                maxLength="12"
                 required
               />
 
-              <button type="submit">Submit</button>
+              <button type="submit" className={styles.submitBtn}>
+                Submit
+              </button>
             </form>
           </div>
         </Dialog>
