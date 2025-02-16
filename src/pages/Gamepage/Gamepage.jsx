@@ -10,6 +10,7 @@ import { getMap } from '../../api/map';
 import { postUser } from '../../api/user';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
+import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
 const GamePage = () => {
   const { activeIndex, images, characterImages } = useContext(
     CurrentBackgroundContext
@@ -141,7 +142,7 @@ const GamePage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [characterData]);
 
-  if (isPending) return <p>Loading...</p>;
+  if (isPending) return <LoadingScreen />;
   if (isError) return <p>Error: {error.message}</p>;
 
   return (

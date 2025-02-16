@@ -7,7 +7,7 @@ import Navbar from '../../components/navbar/navbar';
 import UsersTable from '../../components/Table/Table';
 import ImageCard from '../../components/imagesContainer/imagesContainer';
 import styles from './Leaderboardpage.module.css';
-
+import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
 import { useNavigate } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -57,7 +57,7 @@ function App() {
       // Update the local state when data is fetched
     }, // Avoid making the request if mapId is not available
   });
-  if (isPending) return <p>Loading...</p>;
+  if (isPending) return <LoadingScreen />;
   if (isError) return <p>Error: {error.message}</p>;
 
   return (
