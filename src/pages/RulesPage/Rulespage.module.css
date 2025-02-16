@@ -59,11 +59,11 @@
 }
 
 .card {
-  width: 1000px;
+  max-width: 60vw;
   height: 80vh;
   text-align: justify;
   padding: 20px;
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 500;
   margin-bottom: 5vh;
   color: white;
@@ -71,4 +71,28 @@
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
     rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+@media (max-width: 950px) {
+  .card {
+    max-width: 85vw;
+  }
+}
+
+@media (max-width: 650px) {
+  .card {
+    font-size: 12px;
+  }
+  .homepageText {
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 450px) {
+  .card {
+    font-size: 10px;
+  }
+  .homepageText {
+    margin-bottom: 5px;
+  }
 }
