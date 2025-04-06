@@ -23,7 +23,7 @@
 🔗 **Backend Repo:** [Where's Waldo Backend](https://github.com/Track404/WheresWaldo-Backend)  
 
 📸 **Screenshots:**  
-![Waldo Game Interface](/src/assets/screenshot.png)  
+![Waldo Game Interface](/src/assets/screenShot.png)  
 
 ## **Installation**  
 Clone the repository and install dependencies:  
